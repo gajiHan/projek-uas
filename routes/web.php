@@ -7,6 +7,7 @@ use App\Http\Controllers\LemburController;
 use App\Http\Controllers\PotonganController;
 use App\Http\Controllers\TunjanganController;
 use App\Http\Controllers\GajiController;
+use App\Http\Controllers\SlipController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -69,5 +70,13 @@ Route::post('gaji/index/gajiStore', [GajiController::class, 'store'])->name('gaj
 Route::get('gaji/index/gajiEdit/{id}', [GajiController::class, 'edit'])->name('gaji.edit');
 Route::delete('gaji/index/gajiDelete/{id}', [GajiController::class, 'destroy']);
 Route::put('gaji/index/gajiUpdate/{id}', [GajiController::class, 'update']);
+
+// route slip
+Route::resource('/slip', \App\Http\Controllers\KaryawanController::class);
+Route::get('/slip', [SlipController::class, 'index'])->name('slip.index');
+Route::post('slip/index/slipStore', [SlipController::class, 'store'])->name('slip.store');
+Route::get('slip/index/slipEdit/{id}', [SlipController::class, 'edit'])->name('slip.edit');
+Route::delete('slip/index/slipDelete/{id}', [SlipController::class, 'destroy']);
+Route::put('slip/index/slipUpdate/{id}', [SlipController::class, 'update']);
 
 require __DIR__.'/auth.php';
