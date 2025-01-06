@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('slips', function (Blueprint $table) {
             $table->id();
+            $table->string('bulan');
             $table->foreignId('karyawan_id')->constrained('karyawans')->onDelete('cascade');
             $table->foreignId('departemen_id')->constrained('departemens')->onDelete('cascade');
             $table->foreignId('gaji_id')->constrained('gajis')->onDelete('cascade');

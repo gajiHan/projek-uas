@@ -2,72 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('adminpage')}}/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="{{asset('adminpage')}}/assets/img/favicon.png">
-    <title>
-        Material Dashboard 3 by Creative Tim
-    </title>
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
-    <!-- Nucleo Icons -->
-    <link href="{{asset('adminpage')}}/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="{{asset('adminpage')}}/assets/css/nucleo-svg.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- Material Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <!-- CSS Files -->
-    <link id="pagestyle" href="{{asset('adminpage')}}/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+@include('partials.header')
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
-        <div class="sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand px-4 py-3 m-0" href="" target="_blank">
-                <img src="{{asset('adminpage')}}/assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
-                <span class="ms-1 text-sm text-dark">slipHan</span>
-            </a>
-        </div>
-        <hr class="horizontal dark mt-0 mb-2">
-        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('dashboard-gaji') }}">
-                        <i class="material-symbols-rounded opacity-5">dashboard</i>
-                        <span class="nav-link-text ms-1">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active bg-gradient-dark text-white" href="{{ route('slip.index') }}">
-                        <i class="material-symbols-rounded opacity-5">table_view</i>
-                        <span class="nav-link-text ms-1">Tables</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('dashboard-gaji') }}">
-                        <i class="material-symbols-rounded opacity-5">login</i>
-                        <span class="nav-link-text ms-1">Sign In</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-            <div class="mx-3">
-                <a class="btn btn-outline-dark mt-4 w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree" type="button">Documentation</a>
-                <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-            </div>
-        </div>
-    </aside>
+@include('partials.sidebar')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
@@ -119,6 +58,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Bulan</th>
                                                 <th>Nama Karyawan</th>
                                                 <th>Nama Departemen</th>
                                                 <th>Gaji</th>
@@ -131,6 +71,7 @@
                                             @foreach ($slips as $slip)
                                             <tr id="index_{{ $slip->id }}">
                                                 <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $slip->bulan }}</td>
                                                 <td>{{ $slip->karyawan->nama ?? 'Tidak Ada' }}</td>
                                                 <td>{{ $slip->departemen->nama_departemen ?? 'Tidak Ada' }}</td>
                                                 <td>{{ $slip->gaji->total_gaji ?? 'Tidak Ada' }}</td>
@@ -161,6 +102,29 @@
                                                     <form id="slipForm" name="slipForm" class="form-horizontal">
                                                         <input type="hidden" name="slip_id" id="slip_id">
 
+                                                        {{-- Bulan --}}
+
+                                                        <div class="form-group">
+                                                            <label for="bulan" class="col-sm-3 control-label">Pilih Bulan</label>
+                                                            <div class="col-sm-12">
+                                                                <select class="form-control" id="bulan" name="bulan" required>
+                                                                    <option value="" disabled selected>Pilih Bulan</option>
+                                                                    <option value="Januari">Januari</option>
+                                                                    <option value="Februari">Februari</option>
+                                                                    <option value="Maret">Maret</option>
+                                                                    <option value="April">April</option>
+                                                                    <option value="Mei">Mei</option>
+                                                                    <option value="Juni">Juni</option>
+                                                                    <option value="Juli">Juli</option>
+                                                                    <option value="Agustus">Agustus</option>
+                                                                    <option value="September">September</option>
+                                                                    <option value="Oktober">Oktober</option>
+                                                                    <option value="November">November</option>
+                                                                    <option value="Desember">Desember</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
                                                         {{-- Karyawan --}}
 
                                                         <div class="form-group">
@@ -173,46 +137,45 @@
                                                             </select>
                                                         </div>
 
-                                                        {{-- Departemen --}}
+                                                        {{-- Departemen ID --}}
 
                                                         <div class="form-group">
-                                                            <label for="bulan" class="col-sm-3 control-label">Pilih Bulan</label>
-                                                            <div class="col-sm-12">
-                                                                <select class="form-control" id="nama_departemen" name="nama_departemen" required>
-                                                                    <option value="" disabled selected>Pilih Departemen</option>
-                                                                    <option value="Departemen Keuangan">Departemen Keuangan</option>
-                                                                    <option value="Departemen Pemasaran">Departemen Pemasaran</option>
-                                                                    <option value="Departemen Penjualan">Departemen Penjualan</option>
-                                                                </select>
-                                                            </div>
+                                                            <label for="departemen_id" class="control-label">Departemen</label>
+                                                            <select class="form-control" id="departemen_id" name="departemen_id" required>
+                                                                <option value="" disabled selected>Pilih Departemen</option>
+                                                                @foreach (App\Models\Departemen::all() as $dpt)
+                                                                <option value="{{ $dpt->id }}">{{ $dpt->nama_departemen }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
 
-                                                            {{-- Gaji --}}
-
+                                                        {{-- Gaji --}}
                                                             <div class="form-group">
                                                                 <label for="gaji_id" class="control-label">Gaji</label>
                                                                 <select class="form-control" id="gaji_id" name="gaji_id" required>
                                                                     <option value="" disabled selected>Pilih Gaji</option>
-                                                                    @foreach (App\Models\Karyawan::all() as $dpt)
-                                                                    <option value="{{ $dpt->id }}">{{ $dpt->total_gaji }}</option>
+                                                                    @foreach (App\Models\Gaji::all() as $dpt)
+                                                                        <option value="{{ $dpt->id }}" data-total-gaji="{{ $dpt->total_gaji }}">
+                                                                            {{ $dpt->total_gaji }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
 
                                                             {{-- Tunjangan --}}
-
                                                             <div class="form-group">
                                                                 <label for="tunjangan_id" class="control-label">Tunjangan</label>
                                                                 <select class="form-control" id="tunjangan_id" name="tunjangan_id" required>
                                                                     <option value="" disabled selected>Pilih Tunjangan</option>
-                                                                    @foreach (App\Models\Karyawan::all() as $dpt)
-                                                                    <option value="{{ $dpt->id }}">{{ $dpt->jumlah_tunjangan }}</option>
+                                                                    @foreach (App\Models\Tunjangan::all() as $dpt)
+                                                                        <option value="{{ $dpt->id }}" data-jumlah-tunjangan="{{ $dpt->jumlah_tunjangan }}">
+                                                                            {{ $dpt->jumlah_tunjangan }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
 
-
-                                                            {{-- Total pendapatan --}}
-
+                                                            {{-- Total Pendapatan --}}
                                                             <div class="form-group">
                                                                 <label for="total_pendapatan" class="col-sm-3 control-label">Total</label>
                                                                 <div class="col-sm-12">
@@ -221,20 +184,30 @@
                                                             </div>
 
                                                             <script>
-                                                                document.getElementById('gaji_id').addEventListener('input', hitungTotalslip);
-                                                                document.getElementById('tunjangan_id').addEventListener('change', hitungTotalslip);
+                                                                // Pastikan elemen input tersedia
+                                                                const gajiSelect = document.getElementById('gaji_id');
+                                                                const tunjanganSelect = document.getElementById('tunjangan_id');
+                                                                const totalPendapatanInput = document.getElementById('total_pendapatan');
 
-                                                                function hitungTotalslip() {
-                                                                    var TotalGaji = parseFloat(document.getElementById('gaji_id').value) || 0;
-                                                                    var Tunjangan = parseFloat(document.getElementById('tunjangan_id').value) || 0;
+                                                                // Tambahkan event listener
+                                                                gajiSelect.addEventListener('change', hitungTotalPendapatan);
+                                                                tunjanganSelect.addEventListener('change', hitungTotalPendapatan);
 
-                                                                    // Hitung total slip
-                                                                    var totalslip = TotalGaji + Tunjangan;
+                                                                function hitungTotalPendapatan() {
+                                                                    // Ambil nilai total_gaji dari atribut data di elemen <option>
+                                                                    const totalGaji = parseFloat(gajiSelect.options[gajiSelect.selectedIndex]?.dataset.totalGaji) || 0;
 
-                                                                    // Tampilkan total slip
-                                                                    document.getElementById('total_pendapatan').value = totalslip.toFixed(2);
+                                                                    // Ambil nilai jumlah_tunjangan dari atribut data di elemen <option>
+                                                                    const jumlahTunjangan = parseFloat(tunjanganSelect.options[tunjanganSelect.selectedIndex]?.dataset.jumlahTunjangan) || 0;
+
+                                                                    // Hitung total pendapatan
+                                                                    const totalPendapatan = totalGaji + jumlahTunjangan;
+
+                                                                    // Tampilkan hasil ke input "total_pendapatan"
+                                                                    totalPendapatanInput.value = totalPendapatan.toFixed(2); // Format 2 desimal
                                                                 }
                                                             </script>
+
 
                                                             <div class="col-sm-offset-2 col-sm-10">
                                                                 <button type="submit" class="btn btn-primary" id="btn-save" value="create">Simpan</button>
@@ -247,24 +220,8 @@
                                 </div>
                             </div>
                         </div>
-                        <footer class="footer py-4  ">
-                            <div class="container-fluid">
-                                <div class="row align-items-center justify-content-lg-between">
-                                    <div class="col-lg-6 mb-lg-0 mb-4">
-                                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                                            © <script>
-                                                document.write(new Date().getFullYear())
-                                            </script>,
-                                            made with <i class="fa fa-heart"></i> by
-                                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                                            for a better web.
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </footer>
                     </div>
+                    @include('partials.footer')
 
     </main>
 
@@ -298,6 +255,7 @@
                     $('#btn-save').val("edit-slip");
                     $('#ajax-slip-modal').modal('show');
                     $('#slip_id').val(data.id);
+                    $('#bulan').val(data.bulan);
                     $('#karyawan_id').val(data.karyawan_id);
                     $('#gaji_id').val(data.gaji_id);
                     $('#tunjangan_id').val(data.tunjangan_id);

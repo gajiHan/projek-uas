@@ -10,6 +10,7 @@ class Slip extends Model
     use HasFactory;
     protected $table = 'slips';
     protected $fillable = [
+        'bulan',
         'karyawan_id',
         'departemen_id',
         'gaji_id',
@@ -25,14 +26,14 @@ class Slip extends Model
     }
     public function departemen()
     {
-        return $this->belongsTo(Potongan::class, 'departemen_id');
+        return $this->belongsTo(Departemen::class, 'departemen_id');
     }
     public function gaji()
     {
-        return $this->belongsTo(Lembur::class, 'gaji_id');
+        return $this->belongsTo(Gaji::class, 'gaji_id');
     }
     public function tunjangan()
     {
-        return $this->belongsTo(Lembur::class, 'tunjangan_id');
+        return $this->belongsTo(Tunjangan::class, 'tunjangan_id');
     }
 }

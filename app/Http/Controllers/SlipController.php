@@ -21,6 +21,7 @@ class SlipController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'bulan' => 'required',
             'karyawan_id' => 'required',
             'departemen_id' => 'required',
             'gaji_id' => 'required',
@@ -43,6 +44,7 @@ class SlipController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'bulan' => 'required',
             'karyawan_id' => 'required',
             'departemen_id' => 'required',
             'gaji_id' => 'required',
@@ -53,6 +55,7 @@ class SlipController extends Controller
         $slips = Slip::findOrFail($id);
 
         $slips->update([
+            'bulan' => $request->input('bulan'),
             'karyawan_id' => $request->input('karyawan_id'),
             'departemen_id' => $request->input('departemen_id'),
             'gaji_id' => $request->input('gaji_id'),
