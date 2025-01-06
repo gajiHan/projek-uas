@@ -30,15 +30,18 @@
                   <p class="text-lg text-gray-600 mb-8 mt-6">Mengelola data gaji karyawan GajiHan</p>
                   <div>
 
-                  <a href="{{ route('register') }}" class="px-6 py-3 text-black text-lg font-semibold  hover:bg-teal-600 hover:text-white transition duration-300 w-[159px] h-[51px] bg-[#d9d9d9]/0 rounded-[60px] border border-[#3dd5c9]">
-                    Register
+                  @auth
+                  <a href="{{ route('dashboard-gaji') }}" class="px-6 py-3 text-black text-lg font-semibold  hover:bg-teal-600 hover:text-white transition duration-300 w-[159px] h-[51px] bg-[#d9d9d9]/0 rounded-[60px] border border-[#3dd5c9]">
+                    Dashboard
                   </a>
-                  <a href="{{ route('login') }}" class="px-6 py-3 text-black text-lg font-semibold  hover:bg-teal-600 transition duration-300 w-[159px] h-[51px] bg-[#d9d9d9]/0 rounded-[60px] border border-[#3dd5c9]">
-                   Login
+                  @else
+                  <a href="{{ route('login') }}" class="px-6 py-3 text-black text-lg font-semibold hover:bg-blue-500 transition duration-300 w-[159px] h-[51px] bg-[#d9d9d9]/0 rounded-[60px] border border-[#3dd5c9]">
+                    Get Started
                   </a>
-
+                  @endauth
                   </div>
                 </div>
+
                 <div>
                   <img src="{{asset('adminpage')}}/assets/img/landing-page.png" alt="" class="w-[711px] h-[636px] hidden lg:block ">
                 </div>

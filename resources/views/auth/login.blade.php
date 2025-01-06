@@ -48,50 +48,91 @@
 </x-guest-layout>
 --}}
 
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{{asset('loginpage')}}/style.css" />
     <title>GajiHan</title>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
-    <link rel="stylesheet" href="{{asset('loginpage')}}/dist/style.css">
-
-
-</head>
-
-<body>
-    <!-- partial:index.partial.html -->
+  </head>
+  <body>
     <div class="container">
-        <div class="screen">
-            <div class="screen__content">
-                <form class="login" method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <div class="login__field">
-                        <i class="login__icon fas fa-user"></i>
-                        <input type="email" class="login__input" placeholder="Email" id="email" name="email">
-                    </div>
-                    <div class="login__field">
-                        <i class="login__icon fas fa-lock"></i>
-                        <input type="password" class="login__input" placeholder="Password" id="password" name="password">
-                    </div>
-                    <button class="button login__submit">
-                        <span class="button__text">{{ __('Login') }}</span>
-                        <i class="button__icon fas fa-chevron-right"></i>
-                    </button>
-                </form>
-            </div>
-            <div class="screen__background">
-                <span class="screen__background__shape screen__background__shape4"></span>
-                <span class="screen__background__shape screen__background__shape3"></span>
-                <span class="screen__background__shape screen__background__shape2"></span>
-                <span class="screen__background__shape screen__background__shape1"></span>
-            </div>
+      <div class="forms-container">
+        <div class="signin-signup">
+          <!-- Form Login -->
+        <form method="POST" action="{{ route('login') }}" class="sign-in-form">
+        @csrf
+        <h2 class="title">Login</h2>
+        <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="email" id="email" name="email" placeholder="Email" autocomplete="login-email" />
         </div>
+        <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Password" autocomplete="login-password" />
+        </div>
+        <input type="submit" value="{{ __('Log in') }}" class="btn solid" />
+        </form>
+
+        <!-- Form Register -->
+        <form method="POST" action="{{ route('register') }}" class="sign-up-form">
+        @csrf
+        <h2 class="title">Register</h2>
+        <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" id="name" name="name" placeholder="Username" autocomplete="register-name" />
+        </div>
+        <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="Email" autocomplete="register-email" />
+        </div>
+        <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Password" autocomplete="new-password" />
+        </div>
+        <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" autocomplete="new-password" />
+        </div>
+        <input type="submit" class="btn" value="{{ __('Register') }}" />
+        </form>
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>GajiHan</h3>
+            <p>
+              Don't have an account?
+            </p>
+            <button class="btn transparent" id="sign-up-btn">
+              Register
+            </button>
+          </div>
+          <img src="{{asset('loginpage')}}/img/log.svg" class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>GajiHan</h3>
+            <p>
+              Already have an account?
+            </p>
+            <button class="btn transparent" id="sign-in-btn">
+              Login
+            </button>
+          </div>
+          <img src="{{asset('loginpage')}}/img/register.svg" class="image" alt="" />
+        </div>
+      </div>
     </div>
-    <!-- partial -->
 
-</body>
-
+    <script src="{{asset('loginpage')}}/app.js"></script>
+  </body>
 </html>
