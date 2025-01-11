@@ -46,13 +46,13 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Tabel slip</h6>
+                                <h6 class="text-white text-capitalize ps-3">Tabel Pendapatan</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="card-body px-0 pt-0 pb-2">
                                 <div class="table-responsive p-0">
-                                    <a href="javascript:void(0)" class="btn btn-info ml-3" id="create-new-slip" style="margin-left:15px;">Tambah Data slip</a>
+                                    <a href="javascript:void(0)" class="btn btn-info ml-3" id="create-new-slip" style="margin-left:15px;">Tambah Data Pendapatan</a>
                                     <br><br>
                                     <table class="table table-bordered table-striped" id="laravel_11_datatable">
                                         <thead>

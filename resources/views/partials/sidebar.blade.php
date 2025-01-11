@@ -60,8 +60,9 @@
 
                 <li class="nav-item">
                     <a class="nav-link text-dark {{ request()->routeIs('slip.index') ? 'active' : '' }}" href="{{ route('slip.index') }}">
-                    <i class="material-symbols-rounded opacity-5">receipt</i>
-                        <span class="nav-link-text ms-1">Slip</span>
+                    <i class="material-symbols-rounded opacity-5">account_balance_wallet</i>
+
+                        <span class="nav-link-text ms-1">Pendapatan</span>
                     </a>
                 </li>
 
