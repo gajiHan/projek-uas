@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Gaji;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class GajiController extends Controller
 {
@@ -78,4 +80,12 @@ class GajiController extends Controller
 
         return response()->json(['success' => 'Data gaji berhasil dihapus!']);
     }  
+
+    public function exportPdf(Request $request)
+    {
+        $gajis = Gaji::all();
+        $pdf = Pdf::loadView('pdf.gaji', ['gajis' => $gajis]);
+        $fileName = 'gaji_' . Carbon::now()->timestamp . '.pdf';
+        return $pdf->download($fileName);
+    }
 }

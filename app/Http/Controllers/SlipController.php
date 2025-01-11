@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Slip;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class SlipController extends Controller
 {
@@ -75,4 +77,12 @@ class SlipController extends Controller
 
         return response()->json(['success' => 'Data slip berhasil dihapus!']);
     }  
+
+    public function exportPdf(Request $request)
+    {
+        $slips = Slip::all();
+        $pdf = Pdf::loadView('pdf.slip', ['slips' => $slips]);
+        $fileName = 'slip_' . Carbon::now()->timestamp . '.pdf';
+        return $pdf->download($fileName);
+    }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\TunjanganController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\SlipController;
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,7 +41,7 @@ Route::delete('karyawan/index/karyawanDelete/{id}', [KaryawanController::class, 
 Route::put('karyawan/index/karyawanUpdate/{id}', [KaryawanController::class, 'update']);
 
 // route lembur
-Route::resource('/lembur', \App\Http\Controllers\KaryawanController::class);
+Route::resource('/lembur', \App\Http\Controllers\LemburController::class);
 Route::get('/lembur', [LemburController::class, 'index'])->name('lembur.index');
 Route::post('lembur/index/lemburStore', [LemburController::class, 'store'])->name('lembur.store');
 Route::get('lembur/index/lemburEdit/{id}', [LemburController::class, 'edit'])->name('lembur.edit');
@@ -48,7 +49,7 @@ Route::delete('lembur/index/lemburDelete/{id}', [LemburController::class, 'destr
 Route::put('lembur/index/lemburUpdate/{id}', [LemburController::class, 'update']);
 
 // route potongan
-Route::resource('/potongan', \App\Http\Controllers\KaryawanController::class);
+Route::resource('/potongan', \App\Http\Controllers\PotonganController::class);
 Route::get('/potongan', [PotonganController::class, 'index'])->name('potongan.index');
 Route::post('potongan/index/potonganStore', [PotonganController::class, 'store'])->name('potongan.store');
 Route::get('potongan/index/potonganEdit/{id}', [PotonganController::class, 'edit'])->name('potongan.edit');
@@ -56,7 +57,7 @@ Route::delete('potongan/index/potonganDelete/{id}', [PotonganController::class, 
 Route::put('potongan/index/potonganUpdate/{id}', [PotonganController::class, 'update']);
 
 // route tunjangan
-Route::resource('/tunjangan', \App\Http\Controllers\KaryawanController::class);
+Route::resource('/tunjangan', \App\Http\Controllers\TunjanganController::class);
 Route::get('/tunjangan', [TunjanganController::class, 'index'])->name('tunjangan.index');
 Route::post('tunjangan/index/tunjanganStore', [TunjanganController::class, 'store'])->name('tunjangan.store');
 Route::get('tunjangan/index/tunjanganEdit/{id}', [TunjanganController::class, 'edit'])->name('tunjangan.edit');
@@ -64,19 +65,21 @@ Route::delete('tunjangan/index/tunjanganDelete/{id}', [TunjanganController::clas
 Route::put('tunjangan/index/tunjanganUpdate/{id}', [TunjanganController::class, 'update']);
 
 // route gaji
-Route::resource('/gaji', \App\Http\Controllers\KaryawanController::class);
+Route::resource('/gaji', \App\Http\Controllers\GajiController::class);
 Route::get('/gaji', [GajiController::class, 'index'])->name('gaji.index');
 Route::post('gaji/index/gajiStore', [GajiController::class, 'store'])->name('gaji.store');
 Route::get('gaji/index/gajiEdit/{id}', [GajiController::class, 'edit'])->name('gaji.edit');
 Route::delete('gaji/index/gajiDelete/{id}', [GajiController::class, 'destroy']);
 Route::put('gaji/index/gajiUpdate/{id}', [GajiController::class, 'update']);
+Route::get('/exportpdf', [GajiController::class, 'exportPdf']);
 
 // route slip
-Route::resource('/slip', \App\Http\Controllers\KaryawanController::class);
+Route::resource('/slip', \App\Http\Controllers\SlipController::class);
 Route::get('/slip', [SlipController::class, 'index'])->name('slip.index');
 Route::post('slip/index/slipStore', [SlipController::class, 'store'])->name('slip.store');
 Route::get('slip/index/slipEdit/{id}', [SlipController::class, 'edit'])->name('slip.edit');
 Route::delete('slip/index/slipDelete/{id}', [SlipController::class, 'destroy']);
 Route::put('slip/index/slipUpdate/{id}', [SlipController::class, 'update']);
+Route::get('/export-pdf', [SlipController::class, 'exportPdf']);
 
 require __DIR__.'/auth.php';

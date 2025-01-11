@@ -53,6 +53,9 @@
                             <div class="card-body px-0 pt-0 pb-2">
                                 <div class="table-responsive p-0">
                                     <a href="javascript:void(0)" class="btn btn-info ml-3" id="create-new-gaji" style="margin-left:15px;">Tambah Data Gaji</a>
+                                    <a href="/exportpdf" class="btn btn-danger ml-3" id="create-new-slip" style="margin-left:15px;">
+                                        <i class="fas fa-download"></i> PDF
+                                    </a>
                                     <br><br>
                                     <table class="table table-bordered table-striped" id="laravel_11_datatable">
                                         <thead>
@@ -64,7 +67,7 @@
                                                 <th>Gaji Pokok</th>
                                                 <th>Potongan</th>
                                                 <th>Lembur</th>
-                                                <th>Total gaji</th>
+                                                <th>Total Gaji</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
